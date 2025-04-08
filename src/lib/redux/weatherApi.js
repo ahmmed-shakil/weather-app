@@ -1,21 +1,22 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 // Import environment variables
-const API_KEY = '5ab23cb165b24023bbc154932250604';
-const BASE_URL = 'https://api.weatherapi.com/v1';
+const API_KEY = import.meta.env.VITE_API_KEY;
+// console.log("🚀 ~ API_KEY:", API_KEY);
+const BASE_URL = "https://api.weatherapi.com/v1";
 
 export const weatherApi = createApi({
-  reducerPath: 'weatherApi',
+  reducerPath: "weatherApi",
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (builder) => ({
     // Current weather data
     getCurrentWeather: builder.query({
       query: (location) => ({
-        url: '/current.json',
+        url: "/current.json",
         params: {
           key: API_KEY,
           q: location,
-          aqi: 'yes', // Include air quality data
+          aqi: "yes", // Include air quality data
         },
       }),
     }),
@@ -23,13 +24,13 @@ export const weatherApi = createApi({
     // Weather forecast
     getForecast: builder.query({
       query: ({ location, days = 7 }) => ({
-        url: '/forecast.json',
+        url: "/forecast.json",
         params: {
           key: API_KEY,
           q: location,
           days,
-          aqi: 'yes',
-          alerts: 'yes',
+          aqi: "yes",
+          alerts: "yes",
         },
       }),
     }),
@@ -37,7 +38,7 @@ export const weatherApi = createApi({
     // Search/autocomplete locations
     searchLocation: builder.query({
       query: (query) => ({
-        url: '/search.json',
+        url: "/search.json",
         params: {
           key: API_KEY,
           q: query,
@@ -48,7 +49,7 @@ export const weatherApi = createApi({
     // Historical weather data
     getHistoricalWeather: builder.query({
       query: ({ location, date }) => ({
-        url: '/history.json',
+        url: "/history.json",
         params: {
           key: API_KEY,
           q: location,
@@ -60,7 +61,7 @@ export const weatherApi = createApi({
     // Astronomy data (sunrise, sunset, moon phases)
     getAstronomy: builder.query({
       query: ({ location, date }) => ({
-        url: '/astronomy.json',
+        url: "/astronomy.json",
         params: {
           key: API_KEY,
           q: location,
@@ -72,7 +73,7 @@ export const weatherApi = createApi({
     // Marine weather (if applicable)
     getMarineWeather: builder.query({
       query: ({ location, days = 1 }) => ({
-        url: '/marine.json',
+        url: "/marine.json",
         params: {
           key: API_KEY,
           q: location,
@@ -84,11 +85,11 @@ export const weatherApi = createApi({
     // Air Quality data
     getAirQuality: builder.query({
       query: (location) => ({
-        url: '/current.json',
+        url: "/current.json",
         params: {
           key: API_KEY,
           q: location,
-          aqi: 'yes',
+          aqi: "yes",
         },
         transformResponse: (response) => response.current.air_quality,
       }),
