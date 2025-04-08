@@ -49,9 +49,10 @@ export default function CurrentWeather() {
 
   if (isLoadingCurrent || isLoadingAstronomy) {
     return (
-      <div className="flex justify-center items-center min-h-[50vh]">
+      <div className="flex flex-col justify-center items-center min-h-[50vh]">
+        <iframe src="https://lottie.host/embed/fb93c622-4636-444f-b45e-f7acfc5c8f1f/qCiyrpyHq0.lottie"></iframe>
         <div className="animate-pulse text-xl text-gray-500">
-          Loading weather data...
+          Loading data...
         </div>
       </div>
     );
